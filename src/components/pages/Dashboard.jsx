@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
-import CalendarWidget from "@/components/organisms/CalendarWidget";
 import { useProjects } from "@/hooks/useProjects";
 import { useTasks } from "@/hooks/useTasks";
 import { useClients } from "@/hooks/useClients";
 import Tasks from "@/components/pages/Tasks";
 import Projects from "@/components/pages/Projects";
 import Header from "@/components/organisms/Header";
+import CalendarWidget from "@/components/organisms/CalendarWidget";
 import DashboardStats from "@/components/organisms/DashboardStats";
 import TaskCard from "@/components/molecules/TaskCard";
 import ProjectCard from "@/components/molecules/ProjectCard";
@@ -137,11 +137,11 @@ return (
                 />
               </motion.div>
             ))}
-          </div>
+</div>
         </motion.div>
-</motion.div>
       </div>
     </div>
+  </div>
   </div>
 );
 };
