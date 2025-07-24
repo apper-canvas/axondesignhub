@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import Header from "@/components/organisms/Header";
 import DashboardStats from "@/components/organisms/DashboardStats";
 import ProjectCard from "@/components/molecules/ProjectCard";
 import TaskCard from "@/components/molecules/TaskCard";
@@ -47,12 +48,22 @@ const Dashboard = () => {
     .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
     .slice(0, 5);
 
-  if (projectsLoading || tasksLoading || clientsLoading) {
-    return <Loading />;
-  }
-
+if (projectsLoading || tasksLoading || clientsLoading) {
   return (
-    <div className="space-y-8">
+    <div>
+      <Header title="Dashboard" showSearch={false} />
+      <div className="p-6">
+        <Loading />
+      </div>
+    </div>
+  );
+}
+
+return (
+  <div>
+    <Header title="Dashboard" showSearch={false} />
+    
+    <div className="p-6 space-y-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -122,8 +133,9 @@ const Dashboard = () => {
           </div>
         </motion.div>
       </div>
-    </div>
-  );
+</div>
+  </div>
+);
 };
 
 export default Dashboard;
