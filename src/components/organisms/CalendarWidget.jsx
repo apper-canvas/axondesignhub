@@ -24,7 +24,7 @@ import Loading from "@/components/ui/Loading";
 import { appointmentService } from "@/services/api/appointmentService";
 import { projectService } from "@/services/api/projectService";
 import { clientService } from "@/services/api/clientService";
-
+import React from 'react';
 const CalendarWidget = ({ clientId = null, isPortal = false }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [events, setEvents] = useState([]);
@@ -199,125 +199,134 @@ const CalendarWidget = ({ clientId = null, isPortal = false }) => {
     }
   };
 
-const EventModal = () => (
-    <AnimatePresence>
-      {showEventModal && (
+// EventModal component moved outside to prevent re-rendering on form changes
+const EventModal = React.memo(({ 
+  showEventModal, 
+  setShowEventModal, 
+  selectedEvent, 
+  eventForm, 
+  setEventForm, 
+  handleSaveEvent, 
+  handleDeleteEvent 
+}) => (
+  <AnimatePresence>
+    {showEventModal && (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            setShowEventModal(false);
+          }
+        }}
+      >
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              setShowEventModal(false);
-            }
-          }}
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          className="bg-white rounded-lg p-6 w-full max-w-md"
+          onClick={(e) => e.stopPropagation()}
         >
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-white rounded-lg p-6 w-full max-w-md"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold">
-                {selectedEvent ? 'Edit Event' : 'New Event'}
-              </h3>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setShowEventModal(false)}
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold">
+              {selectedEvent ? 'Edit Event' : 'New Event'}
+            </h3>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowEventModal(false)}
+            >
+              <ApperIcon name="X" size={16} />
+            </Button>
+          </div>
+
+          <div className="space-y-4" onClick={(e) => e.stopPropagation()}>
+            <div onClick={(e) => e.stopPropagation()}>
+              <Input
+                label="Title"
+                value={eventForm.title}
+                onChange={(e) => setEventForm(prev => ({ ...prev, title: e.target.value }))}
+                placeholder="Event title"
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
+
+            <div onClick={(e) => e.stopPropagation()}>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Type
+              </label>
+              <select
+                value={eventForm.type}
+                onChange={(e) => setEventForm(prev => ({ ...prev, type: e.target.value }))}
+                onClick={(e) => e.stopPropagation()}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                disabled={selectedEvent && selectedEvent.type === 'milestone'}
               >
-                <ApperIcon name="X" size={16} />
+                <option value="appointment">Appointment</option>
+                <option value="milestone">Project Milestone</option>
+              </select>
+            </div>
+
+            <div onClick={(e) => e.stopPropagation()}>
+              <Input
+                label="Date"
+                type="date"
+                value={eventForm.date}
+                onChange={(e) => setEventForm(prev => ({ ...prev, date: e.target.value }))}
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
+
+            <div onClick={(e) => e.stopPropagation()}>
+              <Input
+                label="Time"
+                type="time"
+                value={eventForm.time}
+                onChange={(e) => setEventForm(prev => ({ ...prev, time: e.target.value }))}
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
+
+            <div onClick={(e) => e.stopPropagation()}>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Description
+              </label>
+              <textarea
+                value={eventForm.description}
+                onChange={(e) => setEventForm(prev => ({ ...prev, description: e.target.value }))}
+                onClick={(e) => e.stopPropagation()}
+                rows={3}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                placeholder="Event description"
+              />
+            </div>
+
+            <div className="flex gap-2 pt-4">
+              <Button
+                onClick={handleSaveEvent}
+                disabled={!eventForm.title}
+                className="flex-1"
+              >
+                {selectedEvent ? 'Update' : 'Create'}
               </Button>
-            </div>
-
-            <div className="space-y-4" onClick={(e) => e.stopPropagation()}>
-              <div onClick={(e) => e.stopPropagation()}>
-                <Input
-                  label="Title"
-                  value={eventForm.title}
-                  onChange={(e) => setEventForm(prev => ({ ...prev, title: e.target.value }))}
-                  placeholder="Event title"
-                  onClick={(e) => e.stopPropagation()}
-                />
-              </div>
-
-              <div onClick={(e) => e.stopPropagation()}>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Type
-                </label>
-                <select
-                  value={eventForm.type}
-                  onChange={(e) => setEventForm(prev => ({ ...prev, type: e.target.value }))}
-                  onClick={(e) => e.stopPropagation()}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                  disabled={selectedEvent && selectedEvent.type === 'milestone'}
-                >
-                  <option value="appointment">Appointment</option>
-                  <option value="milestone">Project Milestone</option>
-                </select>
-              </div>
-
-              <div onClick={(e) => e.stopPropagation()}>
-                <Input
-                  label="Date"
-                  type="date"
-                  value={eventForm.date}
-                  onChange={(e) => setEventForm(prev => ({ ...prev, date: e.target.value }))}
-                  onClick={(e) => e.stopPropagation()}
-                />
-              </div>
-
-              <div onClick={(e) => e.stopPropagation()}>
-                <Input
-                  label="Time"
-                  type="time"
-                  value={eventForm.time}
-                  onChange={(e) => setEventForm(prev => ({ ...prev, time: e.target.value }))}
-                  onClick={(e) => e.stopPropagation()}
-                />
-              </div>
-
-              <div onClick={(e) => e.stopPropagation()}>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Description
-                </label>
-                <textarea
-                  value={eventForm.description}
-                  onChange={(e) => setEventForm(prev => ({ ...prev, description: e.target.value }))}
-                  onClick={(e) => e.stopPropagation()}
-                  rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                  placeholder="Event description"
-                />
-              </div>
-
-              <div className="flex gap-2 pt-4">
+              
+              {selectedEvent && selectedEvent.type === 'appointment' && (
                 <Button
-                  onClick={handleSaveEvent}
-                  disabled={!eventForm.title}
-                  className="flex-1"
+                  variant="destructive"
+                  onClick={handleDeleteEvent}
                 >
-                  {selectedEvent ? 'Update' : 'Create'}
+                  <ApperIcon name="Trash2" size={16} />
                 </Button>
-                
-                {selectedEvent && selectedEvent.type === 'appointment' && (
-                  <Button
-                    variant="destructive"
-                    onClick={handleDeleteEvent}
-                  >
-                    <ApperIcon name="Trash2" size={16} />
-                  </Button>
-                )}
-              </div>
+              )}
             </div>
-          </motion.div>
+          </div>
         </motion.div>
-      )}
-    </AnimatePresence>
-  );
+      </motion.div>
+    )}
+  </AnimatePresence>
+));
 
   if (loading) {
     return (
@@ -461,7 +470,15 @@ const EventModal = () => (
         )}
       </Card>
 
-      <EventModal />
+<EventModal 
+        showEventModal={showEventModal}
+        setShowEventModal={setShowEventModal}
+        selectedEvent={selectedEvent}
+        eventForm={eventForm}
+        setEventForm={setEventForm}
+        handleSaveEvent={handleSaveEvent}
+        handleDeleteEvent={handleDeleteEvent}
+      />
     </>
   );
 };
