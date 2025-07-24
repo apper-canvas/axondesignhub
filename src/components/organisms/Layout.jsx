@@ -5,8 +5,10 @@ import Sidebar from "@/components/organisms/Sidebar";
 const Layout = () => {
   return (
 <div className="min-h-screen bg-background">
-      <div className="flex">
-        <Sidebar />
+<div className="flex">
+        <div className="border-r border-gray-200">
+          <Sidebar />
+        </div>
         <main className="flex-1">
           <Outlet />
         </main>
