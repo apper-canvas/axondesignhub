@@ -1,0 +1,68 @@
+[
+  {
+    "Id": 1,
+    "clientId": 1,
+    "title": "Initial Design Consultation",
+    "description": "Discuss project requirements, style preferences, and budget for the living room redesign.",
+    "date": "3/15/2024 10:00:00 AMZ",
+    "duration": 60,
+    "status": "scheduled",
+    "type": "consultation",
+    "createdAt": "2024-03-01T09:00:00Z"
+  },
+  {
+    "Id": 2,
+    "clientId": 2,
+    "title": "Smart Home Technology Review",
+    "description": "Review technology integration options and demonstrate smart home features for the office setup.",
+    "date": "2024-03-18T14:00:00Z",
+    "duration": 90,
+    "status": "scheduled",
+    "type": "presentation",
+    "createdAt": "2024-03-02T11:30:00Z"
+  },
+  {
+    "Id": 3,
+    "clientId": 3,
+    "title": "Art Collection Assessment",
+    "description": "Evaluate existing art pieces and plan integration into the new studio design.",
+    "date": "2024-03-20T16:00:00Z",
+    "duration": 120,
+    "status": "scheduled",
+    "type": "consultation",
+    "createdAt": "2024-03-03T13:15:00Z"
+  },
+  {
+    "Id": 4,
+    "clientId": 4,
+    "title": "Final Installation Walkthrough",
+    "description": "Final review of completed executive office installation and address any concerns.",
+    "date": "2024-03-25T09:00:00Z",
+    "duration": 45,
+    "status": "scheduled",
+    "type": "walkthrough",
+    "createdAt": "2024-03-05T10:45:00Z"
+  },
+  {
+    "Id": 5,
+    "clientId": 5,
+    "title": "Kitchen Safety Features Discussion",
+    "description": "Discuss child-safe features and materials for the family kitchen renovation.",
+    "date": "2024-03-22T11:00:00Z",
+    "duration": 75,
+    "status": "scheduled",
+    "type": "consultation",
+    "createdAt": "2024-03-04T15:20:00Z"
+  },
+  {
+    "Id": 6,
+    "clientId": 1,
+    "title": "Material Selection Meeting",
+    "description": "Select fabrics, colors, and finishes for the master bedroom retreat project.",
+    "date": "2024-03-28T13:30:00Z",
+    "duration": 90,
+    "status": "scheduled",
+    "type": "selection",
+    "createdAt": "2024-03-06T12:00:00Z"
+  }
+]

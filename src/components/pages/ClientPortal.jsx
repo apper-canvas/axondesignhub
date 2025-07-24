@@ -8,11 +8,11 @@ import Button from "@/components/atoms/Button";
 import Badge from "@/components/atoms/Badge";
 import Input from "@/components/atoms/Input";
 import Loading from "@/components/ui/Loading";
+import CalendarWidget from "@/components/organisms/CalendarWidget";
 import { projectService } from "@/services/api/projectService";
 import { clientService } from "@/services/api/clientService";
 import ClientPortalLogin from "@/components/molecules/ClientPortalLogin";
 import ProjectProgress from "@/components/molecules/ProjectProgress";
-
 const ClientPortal = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
@@ -68,8 +68,9 @@ const ClientPortal = () => {
     }
   };
 
-  const tabs = [
+const tabs = [
     { id: 'projects', name: 'My Projects', icon: 'FolderOpen' },
+    { id: 'calendar', name: 'Calendar', icon: 'Calendar' },
     { id: 'documents', name: 'Documents', icon: 'FileText' },
     { id: 'messages', name: 'Messages', icon: 'MessageCircle' },
     { id: 'settings', name: 'Settings', icon: 'Settings' }
@@ -328,9 +329,25 @@ const ClientPortal = () => {
     </div>
   );
 
+const CalendarTab = () => (
+    <div className="space-y-6">
+      <div>
+        <h3 className="text-lg font-semibold text-gray-900 mb-2">
+          Your Calendar
+        </h3>
+        <p className="text-gray-600 mb-6">
+          View your appointments and project milestones
+        </p>
+      </div>
+      
+      <CalendarWidget clientId={currentUser?.Id} isPortal={true} />
+    </div>
+  );
+
   const renderTabContent = () => {
     switch (activeTab) {
       case 'projects': return <ProjectsTab />;
+      case 'calendar': return <CalendarTab />;
       case 'documents': return <DocumentsTab />;
       case 'messages': return <MessagesTab />;
       case 'settings': return <SettingsTab />;

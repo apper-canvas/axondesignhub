@@ -1,15 +1,18 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
-import Header from "@/components/organisms/Header";
-import DashboardStats from "@/components/organisms/DashboardStats";
-import ProjectCard from "@/components/molecules/ProjectCard";
-import TaskCard from "@/components/molecules/TaskCard";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
+import CalendarWidget from "@/components/organisms/CalendarWidget";
 import { useProjects } from "@/hooks/useProjects";
 import { useTasks } from "@/hooks/useTasks";
 import { useClients } from "@/hooks/useClients";
+import Tasks from "@/components/pages/Tasks";
+import Projects from "@/components/pages/Projects";
+import Header from "@/components/organisms/Header";
+import DashboardStats from "@/components/organisms/DashboardStats";
+import TaskCard from "@/components/molecules/TaskCard";
+import ProjectCard from "@/components/molecules/ProjectCard";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
 
 const Dashboard = () => {
   const { projects, loading: projectsLoading } = useProjects();
@@ -79,7 +82,11 @@ return (
 
       <DashboardStats stats={stats} />
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+<div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+        {/* Calendar Widget */}
+        <div className="xl:col-span-1">
+          <CalendarWidget />
+        </div>
         {/* Recent Projects */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -132,8 +139,9 @@ return (
             ))}
           </div>
         </motion.div>
+</motion.div>
       </div>
-</div>
+    </div>
   </div>
 );
 };
