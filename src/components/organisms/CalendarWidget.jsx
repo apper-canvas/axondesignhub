@@ -326,7 +326,18 @@ const EventModal = React.memo(({
       </motion.div>
     )}
   </AnimatePresence>
-));
+), (prevProps, nextProps) => {
+  // Custom comparison function to prevent unnecessary re-renders
+  return (
+    prevProps.showEventModal === nextProps.showEventModal &&
+    prevProps.selectedEvent === nextProps.selectedEvent &&
+    prevProps.eventForm.title === nextProps.eventForm.title &&
+    prevProps.eventForm.type === nextProps.eventForm.type &&
+    prevProps.eventForm.date === nextProps.eventForm.date &&
+    prevProps.eventForm.time === nextProps.eventForm.time &&
+    prevProps.eventForm.description === nextProps.eventForm.description
+  );
+});
 
   if (loading) {
     return (
