@@ -1,0 +1,74 @@
+[
+  {
+    "Id": 1,
+    "clientId": 1,
+    "name": "Modern Living Room Redesign",
+    "phase": "design",
+    "startDate": "2024-02-01T00:00:00Z",
+    "targetDate": "2024-04-15T00:00:00Z",
+    "budget": 25000,
+    "spent": 8500,
+    "description": "Complete living room transformation with contemporary furniture, new lighting, and neutral color palette.",
+    "images": ["living-room-1.jpg", "living-room-2.jpg"]
+  },
+  {
+    "Id": 2,
+    "clientId": 2,
+    "name": "Smart Home Office Setup",
+    "phase": "procurement",
+    "startDate": "2024-02-15T00:00:00Z",
+    "targetDate": "2024-05-01T00:00:00Z",
+    "budget": 35000,
+    "spent": 18200,
+    "description": "Minimalist home office with integrated technology, ergonomic furniture, and efficient storage solutions.",
+    "images": ["office-1.jpg", "office-2.jpg", "office-3.jpg"]
+  },
+  {
+    "Id": 3,
+    "clientId": 3,
+    "name": "Eclectic Art Studio",
+    "phase": "consultation",
+    "startDate": "2024-03-01T00:00:00Z",
+    "targetDate": "2024-06-30T00:00:00Z",
+    "budget": 45000,
+    "spent": 2800,
+    "description": "Creative workspace combining vintage and modern elements with bold color accents and flexible display areas.",
+    "images": ["studio-1.jpg"]
+  },
+  {
+    "Id": 4,
+    "clientId": 4,
+    "name": "Executive Home Office",
+    "phase": "installation",
+    "startDate": "2024-01-15T00:00:00Z",
+    "targetDate": "2024-03-30T00:00:00Z",
+    "budget": 28000,
+    "spent": 26500,
+    "description": "Professional home office with custom built-ins, premium materials, and sophisticated lighting.",
+    "images": ["exec-office-1.jpg", "exec-office-2.jpg"]
+  },
+  {
+    "Id": 5,
+    "clientId": 5,
+    "name": "Family-Friendly Kitchen",
+    "phase": "concept",
+    "startDate": "2024-02-20T00:00:00Z",
+    "targetDate": "2024-07-15T00:00:00Z",
+    "budget": 55000,
+    "spent": 5200,
+    "description": "Kitchen renovation focused on safety, durability, and functionality for a family with young children.",
+    "images": ["kitchen-1.jpg", "kitchen-2.jpg", "kitchen-3.jpg"]
+  },
+  {
+    "Id": 6,
+    "clientId": 1,
+    "name": "Master Bedroom Retreat",
+    "phase": "consultation",
+    "startDate": "2024-03-10T00:00:00Z",
+    "targetDate": "2024-06-01T00:00:00Z",
+    "budget": 32000,
+    "spent": 1500,
+    "description": "Serene master bedroom design with luxurious textiles, calming colors, and enhanced storage.",
+    "images": ["bedroom-1.jpg"]
+  }
+]

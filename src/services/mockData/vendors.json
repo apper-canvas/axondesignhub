@@ -1,0 +1,62 @@
+[
+  {
+    "Id": 1,
+    "name": "Premium Furniture Co.",
+    "category": "furniture",
+    "contact": "Jennifer Adams",
+    "email": "jennifer@premiumfurniture.com",
+    "phone": "(555) 111-2222",
+    "website": "www.premiumfurniture.com",
+    "notes": "High-end custom furniture manufacturer. 6-8 week lead times. Excellent quality."
+  },
+  {
+    "Id": 2,
+    "name": "Luxe Lighting Solutions",
+    "category": "lighting",
+    "contact": "Roberto Martinez",
+    "email": "roberto@luxelighting.com",
+    "phone": "(555) 222-3333",
+    "website": "www.luxelighting.com",
+    "notes": "Specializes in designer lighting fixtures. Great selection of modern and traditional styles."
+  },
+  {
+    "Id": 3,
+    "name": "Elite Textiles",
+    "category": "textiles",
+    "contact": "Amanda Chen",
+    "email": "amanda@elitetextiles.com",
+    "phone": "(555) 333-4444",
+    "website": "www.elitetextiles.com",
+    "notes": "Premium fabric supplier. Extensive collection of designer fabrics and custom window treatments."
+  },
+  {
+    "Id": 4,
+    "name": "Artisan Accessories",
+    "category": "accessories",
+    "contact": "Marcus Thompson",
+    "email": "marcus@artisanaccessories.com",
+    "phone": "(555) 444-5555",
+    "website": "www.artisanaccessories.com",
+    "notes": "Unique decorative accessories and art pieces. Great for adding personality to spaces."
+  },
+  {
+    "Id": 5,
+    "name": "Modern Kitchen Systems",
+    "category": "furniture",
+    "contact": "Lisa Rodriguez",
+    "email": "lisa@modernkitchen.com",
+    "phone": "(555) 555-6666",
+    "website": "www.modernkitchen.com",
+    "notes": "Specializes in contemporary kitchen cabinetry and appliances. Excellent installation team."
+  },
+  {
+    "Id": 6,
+    "name": "Smart Home Tech",
+    "category": "accessories",
+    "contact": "David Park",
+    "email": "david@smarthometech.com",
+    "phone": "(555) 666-7777",
+    "website": "www.smarthometech.com",
+    "notes": "Latest in home automation and smart device integration. Certified installation services."
+  }
+]

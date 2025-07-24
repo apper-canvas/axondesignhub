@@ -1,0 +1,68 @@
+[
+  {
+    "Id": 1,
+    "name": "Sarah Johnson",
+    "email": "sarah.johnson@email.com",
+    "phone": "(555) 123-4567",
+    "address": "123 Maple Street, Downtown, NY 10001",
+    "notes": "Prefers modern contemporary style with neutral colors. Budget-conscious but values quality.",
+    "status": "active",
+    "createdAt": "2024-01-15T10:00:00Z",
+    "lastContact": "2024-02-28T14:30:00Z"
+  },
+  {
+    "Id": 2,
+    "name": "Michael Chen",
+    "email": "m.chen@techcorp.com",
+    "phone": "(555) 234-5678",
+    "address": "456 Oak Avenue, Midtown, NY 10002",
+    "notes": "Tech executive looking for minimalist design. Loves smart home integration.",
+    "status": "active",
+    "createdAt": "2024-01-20T09:15:00Z",
+    "lastContact": "2024-03-01T11:45:00Z"
+  },
+  {
+    "Id": 3,
+    "name": "Emily Rodriguez",
+    "email": "emily.r.designs@gmail.com",
+    "phone": "(555) 345-6789",
+    "address": "789 Pine Boulevard, Uptown, NY 10003",
+    "notes": "Artist and gallery owner. Loves bold colors and eclectic mix of vintage and modern pieces.",
+    "status": "prospect",
+    "createdAt": "2024-02-01T16:20:00Z",
+    "lastContact": "2024-02-25T13:15:00Z"
+  },
+  {
+    "Id": 4,
+    "name": "David Thompson",
+    "email": "dthompson@lawfirm.com",
+    "phone": "(555) 456-7890",
+    "address": "321 Cedar Lane, Financial District, NY 10004",
+    "notes": "Partner at law firm. Requires professional yet comfortable home office design.",
+    "status": "active",
+    "createdAt": "2024-02-10T12:30:00Z",
+    "lastContact": "2024-03-02T10:20:00Z"
+  },
+  {
+    "Id": 5,
+    "name": "Jessica Park",
+    "email": "jpark.family@email.com",
+    "phone": "(555) 567-8901",
+    "address": "654 Birch Drive, Residential Area, NY 10005",
+    "notes": "Young family with two children. Needs child-friendly and durable design solutions.",
+    "status": "active",
+    "createdAt": "2024-02-15T08:45:00Z",
+    "lastContact": "2024-02-29T15:30:00Z"
+  },
+  {
+    "Id": 6,
+    "name": "Robert Williams",
+    "email": "rwilliams@realestate.com",
+    "phone": "(555) 678-9012",
+    "address": "987 Elm Street, Business District, NY 10006",
+    "notes": "Real estate developer. Multiple properties need staging and model home designs.",
+    "status": "inactive",
+    "createdAt": "2024-01-05T14:00:00Z",
+    "lastContact": "2024-01-30T09:30:00Z"
+  }
+]

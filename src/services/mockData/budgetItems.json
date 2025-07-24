@@ -1,0 +1,56 @@
+[
+  {
+    "Id": 1,
+    "projectId": 1,
+    "category": "furniture",
+    "description": "Modern sectional sofa",
+    "vendor": "Premium Furniture Co.",
+    "cost": 4500,
+    "status": "ordered"
+  },
+  {
+    "Id": 2,
+    "projectId": 1,
+    "category": "lighting",
+    "description": "Pendant light fixtures (3)",
+    "vendor": "Luxe Lighting Solutions",
+    "cost": 1200,
+    "status": "delivered"
+  },
+  {
+    "Id": 3,
+    "projectId": 1,
+    "category": "textiles",
+    "description": "Custom curtains and pillows",
+    "vendor": "Elite Textiles",
+    "cost": 2800,
+    "status": "in-progress"
+  },
+  {
+    "Id": 4,
+    "projectId": 2,
+    "category": "furniture",
+    "description": "Executive desk and chair set",
+    "vendor": "Premium Furniture Co.",
+    "cost": 8500,
+    "status": "delivered"
+  },
+  {
+    "Id": 5,
+    "projectId": 2,
+    "category": "accessories",
+    "description": "Smart home automation system",
+    "vendor": "Smart Home Tech",
+    "cost": 6200,
+    "status": "installed"
+  },
+  {
+    "Id": 6,
+    "projectId": 2,
+    "category": "lighting",
+    "description": "Task lighting and ambient lights",
+    "vendor": "Luxe Lighting Solutions",
+    "cost": 3500,
+    "status": "ordered"
+  }
+]
