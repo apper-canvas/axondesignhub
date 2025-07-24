@@ -34,12 +34,13 @@ const CalendarWidget = ({ clientId = null, isPortal = false }) => {
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [eventForm, setEventForm] = useState({
+const [eventForm, setEventForm] = useState({
     title: '',
     description: '',
     type: 'appointment',
     clientId: clientId || '',
-    time: '09:00'
+    time: '09:00',
+    date: ''
   });
 
   useEffect(() => {
@@ -128,7 +129,7 @@ const CalendarWidget = ({ clientId = null, isPortal = false }) => {
 
   const handleDateClick = (date) => {
     setSelectedDate(date);
-    setEventForm(prev => ({
+setEventForm(prev => ({
       ...prev,
       date: format(date, 'yyyy-MM-dd')
     }));
@@ -141,7 +142,7 @@ const CalendarWidget = ({ clientId = null, isPortal = false }) => {
     setSelectedEvent(event);
     setSelectedDate(parseISO(event.date));
     setEventForm({
-      title: event.title,
+title: event.title,
       description: event.description || '',
       type: event.type,
       clientId: event.clientId || '',
@@ -151,7 +152,7 @@ const CalendarWidget = ({ clientId = null, isPortal = false }) => {
     setShowEventModal(true);
   };
 
-  const handleSaveEvent = async () => {
+const handleSaveEvent = async () => {
     try {
       const eventData = {
         ...eventForm,
@@ -174,7 +175,8 @@ const CalendarWidget = ({ clientId = null, isPortal = false }) => {
         description: '',
         type: 'appointment',
         clientId: clientId || '',
-        time: '09:00'
+        time: '09:00',
+        date: ''
       });
       loadCalendarData();
     } catch (error) {
@@ -200,7 +202,7 @@ const CalendarWidget = ({ clientId = null, isPortal = false }) => {
   };
 
 // Redesigned EventModal component with improved styling and UX
-const EventModal = React.memo(({ 
+const EventModal = ({ 
   showEventModal, 
   setShowEventModal, 
   selectedEvent, 
@@ -208,165 +210,193 @@ const EventModal = React.memo(({
   setEventForm, 
   handleSaveEvent, 
   handleDeleteEvent 
-}) => (
-  <AnimatePresence>
-    {showEventModal && (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-        onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            setShowEventModal(false);
-          }
-        }}
-      >
+}) => {
+  // Handle form field changes without object recreation
+  const handleTitleChange = (e) => {
+    const value = e.target.value;
+    setEventForm(prev => ({ ...prev, title: value }));
+  };
+
+  const handleDescriptionChange = (e) => {
+    const value = e.target.value;
+    setEventForm(prev => ({ ...prev, description: value }));
+  };
+
+  const handleTypeChange = (e) => {
+    const value = e.target.value;
+    setEventForm(prev => ({ ...prev, type: value }));
+  };
+
+  const handleDateChange = (e) => {
+    const value = e.target.value;
+    setEventForm(prev => ({ ...prev, date: value }));
+  };
+
+  const handleTimeChange = (e) => {
+    const value = e.target.value;
+    setEventForm(prev => ({ ...prev, time: value }));
+  };
+
+  return (
+    <AnimatePresence>
+      {showEventModal && (
         <motion.div
-          initial={{ scale: 0.95, opacity: 0, y: 20 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.95, opacity: 0, y: 20 }}
-          transition={{ type: "spring", duration: 0.3 }}
-          className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg border border-gray-100"
-          onClick={(e) => e.stopPropagation()}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setShowEventModal(false);
+            }
+          }}
         >
-          {/* Header */}
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-2xl font-display font-semibold text-primary">
-                {selectedEvent ? 'Edit Event' : 'Create New Event'}
-              </h2>
-              <p className="text-sm text-gray-500 mt-1">
-                {selectedEvent ? 'Update event details' : 'Add a new event to your calendar'}
-              </p>
-            </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setShowEventModal(false)}
-              className="h-10 w-10 rounded-full hover:bg-gray-100 p-0"
-            >
-              <ApperIcon name="X" size={20} />
-            </Button>
-          </div>
-
-          {/* Form Fields */}
-          <div className="space-y-6">
-            {/* Title Field */}
-            <div>
-              <Input
-                label="Event Title"
-                value={eventForm.title}
-                onChange={(e) => setEventForm(prev => ({ ...prev, title: e.target.value }))}
-                placeholder="Enter event title..."
-                className="text-base"
-                error={!eventForm.title ? "Title is required" : ""}
-              />
-            </div>
-
-            {/* Type and Date Row */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+            transition={{ type: "spring", duration: 0.3 }}
+            className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg border border-gray-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between mb-8">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
-                  Event Type
-                </label>
-                <div className="relative">
-                  <select
-                    value={eventForm.type}
-                    onChange={(e) => setEventForm(prev => ({ ...prev, type: e.target.value }))}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent transition-colors duration-200 bg-white text-gray-900 appearance-none cursor-pointer"
-                    disabled={selectedEvent && selectedEvent.type === 'milestone'}
-                  >
-                    <option value="appointment">📅 Appointment</option>
-                    <option value="milestone">🎯 Project Milestone</option>
-                  </select>
-                  <ApperIcon 
-                    name="ChevronDown" 
-                    size={16} 
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" 
+                <h2 className="text-2xl font-display font-semibold text-primary">
+                  {selectedEvent ? 'Edit Event' : 'Create New Event'}
+                </h2>
+                <p className="text-sm text-gray-500 mt-1">
+                  {selectedEvent ? 'Update event details' : 'Add a new event to your calendar'}
+                </p>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowEventModal(false)}
+                className="h-10 w-10 rounded-full hover:bg-gray-100 p-0"
+              >
+                <ApperIcon name="X" size={20} />
+              </Button>
+            </div>
+
+            {/* Form Fields */}
+            <div className="space-y-6">
+              {/* Title Field */}
+              <div>
+                <Input
+                  label="Event Title"
+                  value={eventForm.title}
+                  onChange={handleTitleChange}
+                  placeholder="Enter event title..."
+                  className="text-base"
+                  error={!eventForm.title ? "Title is required" : ""}
+                />
+              </div>
+
+              {/* Type and Date Row */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Event Type
+                  </label>
+                  <div className="relative">
+                    <select
+                      value={eventForm.type}
+                      onChange={handleTypeChange}
+                      className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent transition-colors duration-200 bg-white text-gray-900 appearance-none cursor-pointer"
+                      disabled={selectedEvent && selectedEvent.type === 'milestone'}
+                    >
+                      <option value="appointment">📅 Appointment</option>
+                      <option value="milestone">🎯 Project Milestone</option>
+                    </select>
+                    <ApperIcon 
+                      name="ChevronDown" 
+                      size={16} 
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" 
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <Input
+                    label="Date"
+                    type="date"
+                    value={eventForm.date}
+                    onChange={handleDateChange}
+                    className="text-base"
                   />
                 </div>
               </div>
 
-              <div>
+              {/* Time Field */}
+              <div className="max-w-xs">
                 <Input
-                  label="Date"
-                  type="date"
-                  value={eventForm.date}
-                  onChange={(e) => setEventForm(prev => ({ ...prev, date: e.target.value }))}
+                  label="Time"
+                  type="time"
+                  value={eventForm.time}
+                  onChange={handleTimeChange}
                   className="text-base"
+                />
+              </div>
+
+              {/* Description Field */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-3">
+                  Description
+                </label>
+                <textarea
+                  value={eventForm.description}
+                  onChange={handleDescriptionChange}
+                  rows={4}
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent transition-colors duration-200 bg-white text-gray-900 placeholder-gray-500 resize-none"
+                  placeholder="Add event details, notes, or instructions..."
                 />
               </div>
             </div>
 
-            {/* Time Field */}
-            <div className="max-w-xs">
-              <Input
-                label="Time"
-                type="time"
-                value={eventForm.time}
-                onChange={(e) => setEventForm(prev => ({ ...prev, time: e.target.value }))}
-                className="text-base"
-              />
-            </div>
-
-            {/* Description Field */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">
-                Description
-              </label>
-              <textarea
-                value={eventForm.description}
-                onChange={(e) => setEventForm(prev => ({ ...prev, description: e.target.value }))}
-                rows={4}
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent transition-colors duration-200 bg-white text-gray-900 placeholder-gray-500 resize-none"
-                placeholder="Add event details, notes, or instructions..."
-              />
-            </div>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex items-center justify-between pt-8 mt-8 border-t border-gray-100">
-            <div className="flex gap-3">
-              {selectedEvent && selectedEvent.type === 'appointment' && (
+            {/* Action Buttons */}
+            <div className="flex items-center justify-between pt-8 mt-8 border-t border-gray-100">
+              <div className="flex gap-3">
+                {selectedEvent && selectedEvent.type === 'appointment' && (
+                  <Button
+                    variant="outline"
+                    onClick={handleDeleteEvent}
+                    className="text-error border-error hover:bg-error hover:text-white"
+                  >
+                    <ApperIcon name="Trash2" size={16} className="mr-2" />
+                    Delete
+                  </Button>
+                )}
+              </div>
+              
+              <div className="flex gap-3">
                 <Button
-                  variant="outline"
-                  onClick={handleDeleteEvent}
-                  className="text-error border-error hover:bg-error hover:text-white"
+                  variant="ghost"
+                  onClick={() => setShowEventModal(false)}
+                  className="px-6"
                 >
-                  <ApperIcon name="Trash2" size={16} className="mr-2" />
-                  Delete
+                  Cancel
                 </Button>
-              )}
+                <Button
+                  onClick={handleSaveEvent}
+                  disabled={!eventForm.title.trim()}
+                  className="px-8 bg-gradient-to-r from-accent to-warning hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <ApperIcon 
+                    name={selectedEvent ? "Save" : "Plus"} 
+                    size={16} 
+                    className="mr-2" 
+                  />
+                  {selectedEvent ? 'Update Event' : 'Create Event'}
+                </Button>
+              </div>
             </div>
-            
-            <div className="flex gap-3">
-              <Button
-                variant="ghost"
-                onClick={() => setShowEventModal(false)}
-                className="px-6"
-              >
-                Cancel
-              </Button>
-              <Button
-                onClick={handleSaveEvent}
-                disabled={!eventForm.title.trim()}
-                className="px-8 bg-gradient-to-r from-accent to-warning hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <ApperIcon 
-                  name={selectedEvent ? "Save" : "Plus"} 
-                  size={16} 
-                  className="mr-2" 
-                />
-                {selectedEvent ? 'Update Event' : 'Create Event'}
-              </Button>
-            </div>
-          </div>
+          </motion.div>
         </motion.div>
-      </motion.div>
-    )}
-  </AnimatePresence>
-));
+      )}
+    </AnimatePresence>
+  );
+};
 
 // Simplified memo comparison for better performance
 EventModal.displayName = 'EventModal';
@@ -498,7 +528,7 @@ EventModal.displayName = 'EventModal';
                 onClick={() => {
                   setSelectedDate(new Date());
                   setSelectedEvent(null);
-                  setEventForm(prev => ({
+setEventForm(prev => ({
                     ...prev,
                     date: format(new Date(), 'yyyy-MM-dd')
                   }));
