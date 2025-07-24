@@ -199,7 +199,7 @@ const CalendarWidget = ({ clientId = null, isPortal = false }) => {
     }
   };
 
-  const EventModal = () => (
+const EventModal = () => (
     <AnimatePresence>
       {showEventModal && (
         <motion.div
@@ -207,7 +207,11 @@ const CalendarWidget = ({ clientId = null, isPortal = false }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-          onClick={() => setShowEventModal(false)}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setShowEventModal(false);
+            }
+          }}
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
@@ -229,21 +233,25 @@ const CalendarWidget = ({ clientId = null, isPortal = false }) => {
               </Button>
             </div>
 
-            <div className="space-y-4">
-              <Input
-                label="Title"
-                value={eventForm.title}
-                onChange={(e) => setEventForm(prev => ({ ...prev, title: e.target.value }))}
-                placeholder="Event title"
-              />
+            <div className="space-y-4" onClick={(e) => e.stopPropagation()}>
+              <div onClick={(e) => e.stopPropagation()}>
+                <Input
+                  label="Title"
+                  value={eventForm.title}
+                  onChange={(e) => setEventForm(prev => ({ ...prev, title: e.target.value }))}
+                  placeholder="Event title"
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
 
-              <div>
+              <div onClick={(e) => e.stopPropagation()}>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Type
                 </label>
                 <select
                   value={eventForm.type}
                   onChange={(e) => setEventForm(prev => ({ ...prev, type: e.target.value }))}
+                  onClick={(e) => e.stopPropagation()}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   disabled={selectedEvent && selectedEvent.type === 'milestone'}
                 >
@@ -252,27 +260,34 @@ const CalendarWidget = ({ clientId = null, isPortal = false }) => {
                 </select>
               </div>
 
-              <Input
-                label="Date"
-                type="date"
-                value={eventForm.date}
-                onChange={(e) => setEventForm(prev => ({ ...prev, date: e.target.value }))}
-              />
+              <div onClick={(e) => e.stopPropagation()}>
+                <Input
+                  label="Date"
+                  type="date"
+                  value={eventForm.date}
+                  onChange={(e) => setEventForm(prev => ({ ...prev, date: e.target.value }))}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
 
-              <Input
-                label="Time"
-                type="time"
-                value={eventForm.time}
-                onChange={(e) => setEventForm(prev => ({ ...prev, time: e.target.value }))}
-              />
+              <div onClick={(e) => e.stopPropagation()}>
+                <Input
+                  label="Time"
+                  type="time"
+                  value={eventForm.time}
+                  onChange={(e) => setEventForm(prev => ({ ...prev, time: e.target.value }))}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
 
-              <div>
+              <div onClick={(e) => e.stopPropagation()}>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Description
                 </label>
                 <textarea
                   value={eventForm.description}
                   onChange={(e) => setEventForm(prev => ({ ...prev, description: e.target.value }))}
+                  onClick={(e) => e.stopPropagation()}
                   rows={3}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   placeholder="Event description"
