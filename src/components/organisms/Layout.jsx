@@ -4,13 +4,11 @@ import Sidebar from "@/components/organisms/Sidebar";
 
 const Layout = () => {
   return (
-    <div className="min-h-screen bg-background">
+<div className="min-h-screen bg-background">
       <div className="flex">
         <Sidebar />
-<main className="flex-1 lg:ml-0">
-          <div>
-            <Outlet />
-          </div>
+        <main className="flex-1">
+          <Outlet />
         </main>
       </div>
       
