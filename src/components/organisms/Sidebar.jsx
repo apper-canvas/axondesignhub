@@ -6,12 +6,13 @@ import ApperIcon from "@/components/ApperIcon";
 const Sidebar = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
-  const navigation = [
+const navigation = [
     { name: "Dashboard", href: "/", icon: "LayoutDashboard" },
     { name: "Clients", href: "/clients", icon: "Users" },
     { name: "Projects", href: "/projects", icon: "FolderOpen" },
     { name: "Tasks", href: "/tasks", icon: "CheckSquare" },
-    { name: "Vendors", href: "/vendors", icon: "Building2" }
+    { name: "Vendors", href: "/vendors", icon: "Building2" },
+    { name: "Client Portal", href: "/client-portal", icon: "UserCheck" }
   ];
 
   const SidebarContent = () => (
